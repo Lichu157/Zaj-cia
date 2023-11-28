@@ -1,0 +1,31 @@
+def cezar():
+    with open('E:\Szkola\Klasa 2\Podstawy Programowania\in.txt', 'r', encoding='utf-8') as f:
+        text = f.read()
+    mode = input("Czy chcesz zaszyfrować czy odszyfrować tekst? (wpisz 'szyfruj' lub 'deszyfruj'): ")
+
+    key = int(input("Podaj klucz (liczbę całkowitą): "))
+
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+
+    result = ''
+
+    for char in text:
+        if char.lower() in alphabet:
+            index = alphabet.index(char.lower())
+
+            if mode == 'szyfruj':
+                new_index = (index + key) % len(alphabet)
+            else:  
+                new_index = (index - key) % len(alphabet)
+
+            if char.isupper():
+                result += alphabet[new_index].upper()
+            else:
+                result += alphabet[new_index]
+        else:
+            result += char
+
+    with open('E:\Szkola\Klasa 2\Podstawy Programowania\out.txt', 'w', encoding='utf-8') as f:
+        f.write(result)
+
+cezar()
